@@ -60,10 +60,13 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'tugas2';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Tugas 1" href="Tugas_PenDat.html" />
+    <link rel="next" title="Deteksi Outlier dengan K-Nearest Neighbors (KNN) dalam Data Understanding" href="KNN.html" />
+    <link rel="prev" title="Understanding Data" href="tugas1.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -168,9 +171,12 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="Tugas_PenDat.html">Tugas 1</a></li>
-
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Tugas 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tugas1.html">Understanding Data</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Tugas 2</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="KNN.html">Deteksi Outlier dengan K-Nearest Neighbors (KNN) dalam Data Understanding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="LOF.html">Deteksi Outlier dengan metode Local Outlier Factor (LOF) dalam Data Understanding</a></li>
+</ul>
+</details></li>
 </ul>
 
     </div>
@@ -363,9 +369,8 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-outlier-deteksi"><strong>Penjelasan Outlier Deteksi</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deteksi-outlier-dengan-k-nearest-neighbors-knn-dalam-data-understanding">Deteksi Outlier dengan K-Nearest Neighbors (KNN) dalam Data Understanding</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">Kesimpulan:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-outlier-deteksi">Penjelasan Outlier Deteksi</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pengertian-dari-outlier-dan-outlier-deteksi">Pengertian dari Outlier dan Outlier Deteksi</a></li>
 </ul>
 </li>
 </ul>
@@ -382,70 +387,11 @@
   <section class="tex2jax_ignore mathjax_ignore" id="tugas-2">
 <h1>Tugas 2<a class="headerlink" href="#tugas-2" title="Link to this heading">#</a></h1>
 <section id="penjelasan-outlier-deteksi">
-<h2><strong>Penjelasan Outlier Deteksi</strong><a class="headerlink" href="#penjelasan-outlier-deteksi" title="Link to this heading">#</a></h2>
-<section id="deteksi-outlier-dengan-k-nearest-neighbors-knn-dalam-data-understanding">
-<h3>Deteksi Outlier dengan K-Nearest Neighbors (KNN) dalam Data Understanding<a class="headerlink" href="#deteksi-outlier-dengan-k-nearest-neighbors-knn-dalam-data-understanding" title="Link to this heading">#</a></h3>
-<ol class="arabic simple">
-<li><p>Pengertian Outlier dan Deteksi Outlier</p></li>
-</ol>
+<h2>Penjelasan Outlier Deteksi<a class="headerlink" href="#penjelasan-outlier-deteksi" title="Link to this heading">#</a></h2>
+<section id="pengertian-dari-outlier-dan-outlier-deteksi">
+<h3>Pengertian dari Outlier dan Outlier Deteksi<a class="headerlink" href="#pengertian-dari-outlier-dan-outlier-deteksi" title="Link to this heading">#</a></h3>
 <p>Outlier merupakan data yang memiliki karakteristik berbeda secara signifikan dibandingkan dengan data lain dalam suatu dataset. Outlier bisa muncul karena berbagai faktor, seperti kesalahan dalam pencatatan data, kesalahan input, atau memang mewakili suatu fenomena khusus yang jarang terjadi. Keberadaan outlier dapat memberikan dampak besar pada analisis data dan model machine learning, sehingga perlu diidentifikasi dengan metode yang tepat.</p>
-<p>Deteksi outlier adalah proses untuk menemukan data yang menyimpang dari pola umum dalam dataset. Salah satu teknik yang bisa digunakan untuk mendeteksi outlier adalah K-Nearest Neighbors (KNN), yang bekerja dengan prinsip kedekatan antar data.</p>
-<ol class="arabic simple" start="2">
-<li><p>Mengapa KNN Bisa Digunakan untuk Deteksi Outlier?</p></li>
-</ol>
-<p>KNN merupakan algoritma berbasis jarak yang menilai hubungan antara titik data berdasarkan seberapa dekat mereka satu sama lain. Dalam konteks deteksi outlier, pendekatan ini berguna karena kita bisa mengukur bagaimana distribusi suatu titik dibandingkan dengan titik-titik lainnya di sekitarnya.</p>
-<p>Prinsip utama KNN dalam mendeteksi outlier adalah sebagai berikut:</p>
-<ul class="simple">
-<li><p>Jika suatu titik hanya memiliki sedikit tetangga dalam jarak tertentu, kemungkinan besar titik tersebut merupakan outlier.</p></li>
-<li><p>Jika rata-rata jarak suatu titik ke tetangga terdekatnya sangat besar dibandingkan dengan titik lainnya, maka titik tersebut bisa dianggap sebagai outlier.</p></li>
-</ul>
-<ol class="arabic simple" start="3">
-<li><p>Tahapan Deteksi Outlier dengan KNN</p></li>
-</ol>
-<p>a. Menghitung Jarak Antar Titik Data</p>
-<p>Langkah pertama adalah menentukan jarak antar titik menggunakan metrik seperti:</p>
-<ul class="simple">
-<li><p>Euclidean Distance (jarak garis lurus antara dua titik) Manhattan Distance (jumlah perbedaan absolut pada setiap dimensi)
-Minkowski Distance (generalisasi dari Euclidean dan Manhattan)</p></li>
-</ul>
-<p>b. Menentukan Nilai K (Jumlah Tetangga Terdekat)
-Pemilihan nilai K berpengaruh besar terhadap hasil deteksi outlier:</p>
-<ul class="simple">
-<li><p>K terlalu kecil → Model bisa menjadi terlalu sensitif terhadap noise.
-K terlalu besar → Deteksi outlier bisa menjadi kurang akurat karena terlalu banyak titik yang dipertimbangkan.</p></li>
-</ul>
-<p>c. Mengukur Kepadatan Data (Density Score)</p>
-<p>Ada beberapa pendekatan yang digunakan untuk menentukan apakah suatu titik merupakan outlier:</p>
-<ul class="simple">
-<li><p>K-Nearest Neighbor Distance</p></li>
-<li><p>Menghitung rata-rata jarak titik ke K tetangga terdekatnya.
-Jika jarak ini jauh lebih besar dibandingkan dengan titik lainnya, maka titik tersebut bisa dianggap sebagai outlier.
-Local Outlier Factor (LOF)</p></li>
-<li><p>LOF membandingkan kepadatan lokal suatu titik dengan kepadatan lokal tetangganya.</p></li>
-<li><p>Jika kepadatan lokal suatu titik jauh lebih rendah dibandingkan dengan tetangganya, maka kemungkinan besar titik tersebut adalah outlier.
-Distance-Based Outlier Score</p></li>
-<li><p>Jika dalam radius tertentu suatu titik hanya memiliki sedikit tetangga, maka titik tersebut bisa dianggap sebagai outlier.</p></li>
-</ul>
-<ol class="arabic simple" start="4">
-<li><p>Kelebihan dan Kekurangan Deteksi Outlier dengan KNN</p></li>
-</ol>
-<p>Kelebihan:</p>
-<ul class="simple">
-<li><p>Sederhana dan intuitif, karena hanya berbasis jarak.</p></li>
-<li><p>Tidak memerlukan asumsi distribusi data tertentu, sehingga fleksibel untuk berbagai jenis dataset.</p></li>
-<li><p>Cocok untuk dataset berdimensi tinggi.</p></li>
-</ul>
-<p>Kekurangan:</p>
-<ul class="simple">
-<li><p>Membutuhkan komputasi tinggi, terutama untuk dataset besar karena harus menghitung jarak setiap titik terhadap banyak titik lainnya.</p></li>
-<li><p>Pemilihan nilai K yang tidak optimal bisa mengurangi akurasi deteksi outlier.</p></li>
-</ul>
-</section>
-<section id="kesimpulan">
-<h3>Kesimpulan:<a class="headerlink" href="#kesimpulan" title="Link to this heading">#</a></h3>
-<p>KNN merupakan metode yang efektif untuk mendeteksi outlier dalam proses Data Understanding dengan menganalisis hubungan jarak antar data.</p>
-<p>Dengan menggunakan pendekatan seperti K-Nearest Neighbor Distance dan Local Outlier Factor (LOF), kita dapat mengidentifikasi data yang memiliki kepadatan rendah atau jaraknya jauh dari kelompok data lainnya.</p>
-<p>Agar deteksi outlier berjalan optimal, diperlukan pemilihan nilai K yang sesuai serta penggunaan metrik jarak yang tepat untuk menyesuaikan dengan karakteristik dataset yang digunakan.</p>
+<p>Outlier Deteksi  adalah proses untuk menemukan data yang menyimpang dari pola umum dalam dataset. Salah satu teknik yang bisa digunakan untuk mendeteksi outlier adalah K-Nearest Neighbors (KNN), yang bekerja dengan prinsip kedekatan antar data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">pip</span> install pymysql
@@ -476,6 +422,12 @@ Distance-Based Outlier Score</p></li>
 </div>
 </div>
 </div>
+<p>Kode diatas ini memastikan bahwa pustaka yang diperlukan telah diinstal sebelum menjalankan skrip yang berinteraksi dengan MySQL atau PostgreSQL.</p>
+<ul class="simple">
+<li></li>
+<li><p>pymysql → Pustaka yang digunakan untuk menghubungkan Python dengan database MySQL atau MariaDB menggunakan protokol asli MySQL.</p></li>
+<li><p>psycopg2 → Pustaka yang digunakan untuk menghubungkan Python dengan database PostgreSQL, menyediakan antarmuka untuk menjalankan perintah SQL dan berinteraksi dengan database PostgreSQL.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">psycopg2</span>
@@ -723,6 +675,8 @@ Distance-Based Outlier Score</p></li>
 <img alt="_images/9675b0d7724b1bf28b19784698dca0984af7d7e5bfc5695e141d2fbc36f87414.png" src="_images/9675b0d7724b1bf28b19784698dca0984af7d7e5bfc5695e141d2fbc36f87414.png" />
 </div>
 </div>
+<p>Kode diatas ini digunakan untuk mengambil data dari dua database (PostgreSQL dan MySQL), menggabungkannya berdasarkan ID dan kelas, lalu mendeteksi outlier menggunakan jarak Euclidean terhadap titik referensi (baris terakhir dalam dataset).</p>
+<p>Setelah outlier dihitung berdasarkan threshold persentil 93.5%, hasilnya divisualisasikan dalam scatter plot untuk melihat perbedaan antara data normal (biru) dan outlier (merah).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Hitung total outlier</span>
@@ -737,6 +691,11 @@ Distance-Based Outlier Score</p></li>
 </div>
 </div>
 </div>
+<p>Kode ini digunakan untuk menghitung total jumlah outlier dalam dataset setelah proses deteksi outlier dilakukan.</p>
+<ul class="simple">
+<li><p>df_merged[“outlier”].sum() menghitung jumlah nilai True dalam kolom “outlier” (yaitu jumlah baris yang dianggap outlier).</p></li>
+<li><p>Hasilnya ditampilkan dengan format “Total Outlier: X”, di mana X adalah jumlah outlier yang terdeteksi.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Urutkan data berdasarkan jarak dari terkecil ke terbesar</span>
@@ -904,8 +863,17 @@ Distance-Based Outlier Score</p></li>
 </div>
 </div>
 </div>
+<p>Kode diatas ini digunakan untuk mengurutkan data berdasarkan jarak Euclidean dari referensi (dari terkecil ke terbesar).</p>
+<ul class="simple">
+<li><p>df_merged.sort_values(by=”distance”, ascending=True) mengurutkan dataframe berdasarkan kolom “distance”.</p></li>
+<li><p>ascending=True memastikan data diurutkan dari nilai jarak terkecil ke terbesar.</p></li>
+<li><p>print(df_sorted.to_string(index=False)) menampilkan hasilnya dalam bentuk tabel tanpa menampilkan indeks dataframe.</p></li>
+</ul>
+<p>Tujuan: Memudahkan analisis dengan melihat data yang paling dekat hingga paling jauh dari referensi.</p>
 </section>
 </section>
+<div class="toctree-wrapper compound">
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -939,13 +907,22 @@ Distance-Based Outlier Score</p></li>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="Tugas_PenDat.html"
+       href="tugas1.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Tugas 1</p>
+        <p class="prev-next-title">Understanding Data</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="KNN.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Deteksi Outlier dengan K-Nearest Neighbors (KNN) dalam Data Understanding</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -964,9 +941,8 @@ Distance-Based Outlier Score</p></li>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-outlier-deteksi"><strong>Penjelasan Outlier Deteksi</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deteksi-outlier-dengan-k-nearest-neighbors-knn-dalam-data-understanding">Deteksi Outlier dengan K-Nearest Neighbors (KNN) dalam Data Understanding</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">Kesimpulan:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-outlier-deteksi">Penjelasan Outlier Deteksi</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pengertian-dari-outlier-dan-outlier-deteksi">Pengertian dari Outlier dan Outlier Deteksi</a></li>
 </ul>
 </li>
 </ul>
