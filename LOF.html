@@ -429,56 +429,94 @@ Misalkan data berikut:</p></li>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>1</p></td>
+<td><p>1.0</p></td>
+<td><p>2.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
 <td><p>2.0</p></td>
 <td><p>3.0</p></td>
 </tr>
-<tr class="row-odd"><td><p>2</p></td>
+<tr class="row-even"><td><p>3</p></td>
 <td><p>3.0</p></td>
 <td><p>4.0</p></td>
 </tr>
-<tr class="row-even"><td><p>3</p></td>
+<tr class="row-odd"><td><p>4</p></td>
 <td><p>4.0</p></td>
 <td><p>5.0</p></td>
 </tr>
-<tr class="row-odd"><td><p>4</p></td>
+<tr class="row-even"><td><p>5</p></td>
 <td><p>5.0</p></td>
 <td><p>6.0</p></td>
 </tr>
-<tr class="row-even"><td><p>5</p></td>
+<tr class="row-odd"><td><p>6</p></td>
 <td><p>6.0</p></td>
 <td><p>7.0</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>7.0</p></td>
+<td><p>8.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>8.0</p></td>
+<td><p>9.0</p></td>
+</tr>
+<tr class="row-even"><td><p>9</p></td>
+<td><p>9.0</p></td>
+<td><p>10.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p>10.0</p></td>
+<td><p>11.0</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>Kita akan hitung LOF untuk <strong>titik 3</strong> (4.0, 5.0).</p>
+<p>Kita akan hitung LOF untuk titik 5 (5.0, 6.0).</p>
 <ol class="arabic simple" start="2">
 <li><p><strong>Hitung Jarak Euclidean</strong>:<br />
 Jarak antara titik 3 dan titik lainnya:</p>
 <ul class="simple">
-<li><p>Titik 3 ke Titik 2: 1.41</p></li>
-<li><p>Titik 3 ke Titik 4: 1.41</p></li>
+<li><p>Titik 5 ke Titik 4: 1.41</p></li>
+<li><p>Titik 5 ke Titik 6: 1.14</p></li>
+<li><p>Titik 5 ke Titik 3: 2.83</p></li>
+<li><p>Titik 5 ke Titik 7: 2.83</p></li>
+<li><p>Titik 5 ke Titik 2: 4.24</p></li>
+<li><p>Titik 5 ke Titik 8: 4.24</p></li>
+<li><p>Titik 5 ke Titik 1: 5.66</p></li>
+<li><p>Titik 5 ke Titik 9: 5.66</p></li>
+<li><p>Titik 5 ke Titik 10: 7.07</p></li>
 </ul>
 </li>
 <li><p><strong>Tentukan k-Tetangga Terdekat</strong> (k=2):<br />
-Titik 3 memiliki dua tetangga terdekat: titik 2 dan titik 4.</p></li>
+Dua tetangga terdekat titik 5 adalah:</p>
+<ul class="simple">
+<li><p>Titik 4 (4.0, 5.0) → jarak 1.41</p></li>
+<li><p>Titik 6 (6.0, 7.0) → jarak 1.41</p></li>
+</ul>
+</li>
 <li><p><strong>Hitung Reachability Distance</strong>:<br />
 Reachability distance antara titik 3 dan tetangga:</p>
 <ul class="simple">
-<li><p>Titik 3 ke Titik 2: 1.41</p></li>
-<li><p>Titik 3 ke Titik 4: 1.41</p></li>
+<li><p>Titik 5 ke Titik 4: 1.41</p></li>
+<li><p>Titik 5 ke Titik 6: 1.41</p></li>
 </ul>
 </li>
 <li><p><strong>Hitung Local Reachability Density (LRD)</strong>:<br />
-<span class="math notranslate nohighlight">\(
-\text{LRD}(3) = \frac{1}{\frac{1}{2} \times (1.41 + 1.41)} = 0.71
-\)</span></p></li>
+$<span class="math notranslate nohighlight">\(
+\text{LRD}(5) = \frac{1}{\frac{1}{2} \times (1.41 + 1.41)}
+\)</span>$</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+  \text{LRD}(5) = \frac{1}{\frac{1}{2} \times 2.82} = \frac{1}{1.41} = 0.71
+  \]</div>
+<ol class="arabic simple" start="6">
 <li><p><strong>Hitung LOF</strong>:<br />
-<span class="math notranslate nohighlight">\(
-\text{LOF}(3) = \frac{0.71}{0.71} + \frac{0.71}{0.71} = 2
-\)</span></p></li>
+$<span class="math notranslate nohighlight">\(
+\text{LOF}(5) = \frac{0.71}{0.71} + \frac{0.71}{0.71} = 2
+\)</span>$</p></li>
 <li><p><strong>Interpretasi</strong>:<br />
-Karena <strong>LOF = 2</strong> (lebih besar dari 1), titik 3 dianggap <strong>outlier</strong>.</p></li>
+Karena LOF = 2 (lebih besar dari 1), titik 5 dianggap outlier.</p></li>
 </ol>
 <p>LOF mengukur seberapa terisolasi titik dibandingkan tetangganya. Titik dengan LOF lebih besar dari 1 dianggap outlier.</p>
 </section>
@@ -492,8 +530,8 @@ Karena <strong>LOF = 2</strong> (lebih besar dari 1), titik 3 dianggap <strong>o
 
 <span class="c1"># Dataset berdasarkan contoh manual</span>
 <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;Feature1&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">],</span>
-    <span class="s1">&#39;Feature2&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">,</span> <span class="mf">7.0</span><span class="p">]</span>
+    <span class="s1">&#39;Feature1&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">,</span> <span class="mf">7.0</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">,</span> <span class="mf">9.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">],</span>
+    <span class="s1">&#39;Feature2&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">,</span> <span class="mf">7.0</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">,</span> <span class="mf">9.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mf">11.0</span><span class="p">]</span>
 <span class="p">}</span>
 
 <span class="c1"># Membuat DataFrame</span>
@@ -529,6 +567,10 @@ Karena <strong>LOF = 2</strong> (lebih besar dari 1), titik 3 dianggap <strong>o
 2       4.0       5.0          1
 3       5.0       6.0          1
 4       6.0       7.0          1
+5       7.0       8.0          1
+6       8.0       9.0          1
+7       9.0      10.0          1
+8      10.0      11.0          1
 
 Jumlah outlier: 0
 
