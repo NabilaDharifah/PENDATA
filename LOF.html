@@ -370,7 +370,15 @@
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apa-itu-lof">Apa Itu LOF</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tahapan-local-outlier-factor-lof">Tahapan Local Outlier Factor (LOF)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contoh-menghitung-manual-lof">CONTOH MENGHITUNG MANUAL LOF</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contoh-menghitung-manual-lof">CONTOH MENGHITUNG MANUAL LOF</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hitung-jarak-euclidean"><strong>1. Hitung Jarak Euclidean</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-jarak-euclidean-titik-5-ke-titik-lainnya"><strong>Menghitung Jarak Euclidean Titik 5 ke Titik Lainnya</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tentukan-k-tetangga-terdekat-k-2"><strong>2. Tentukan ( k )-Tetangga Terdekat (k = 2)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hitung-reachability-distance"><strong>3. Hitung Reachability Distance</strong></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-pakai-sklearn-untuk-data-contoh">Implementasi Pakai Sklearn Untuk Data Contoh</a></li>
 </ul>
             </nav>
@@ -472,35 +480,102 @@ Misalkan data berikut:</p></li>
 </table>
 </div>
 <p>Kita akan hitung LOF untuk titik 5 (5.0, 6.0).</p>
-<ol class="arabic simple" start="2">
-<li><p><strong>Hitung Jarak Euclidean</strong>:<br />
-Jarak antara titik 3 dan titik lainnya:</p>
+<p>Berikut adalah langkah-langkah perhitungan jarak Euclidean, menentukan ( k )-tetangga terdekat, dan menghitung reachability distance berdasarkan data yang diberikan:</p>
+<hr class="docutils" />
+<section id="hitung-jarak-euclidean">
+<h3><strong>1. Hitung Jarak Euclidean</strong><a class="headerlink" href="#hitung-jarak-euclidean" title="Link to this heading">#</a></h3>
+<p>Jarak Euclidean antara dua titik ( (x_1, y_1) ) dan ( (x_2, y_2) ) diberikan oleh rumus:</p>
+<p><span class="math notranslate nohighlight">\(
+d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}
+\)</span></p>
+<p>Misalkan kita memiliki titik-titik berikut:</p>
 <ul class="simple">
-<li><p>Titik 5 ke Titik 4: 1.41</p></li>
-<li><p>Titik 5 ke Titik 6: 1.14</p></li>
-<li><p>Titik 5 ke Titik 3: 2.83</p></li>
-<li><p>Titik 5 ke Titik 7: 2.83</p></li>
-<li><p>Titik 5 ke Titik 2: 4.24</p></li>
-<li><p>Titik 5 ke Titik 8: 4.24</p></li>
-<li><p>Titik 5 ke Titik 1: 5.66</p></li>
-<li><p>Titik 5 ke Titik 9: 5.66</p></li>
-<li><p>Titik 5 ke Titik 10: 7.07</p></li>
+<li><p><strong>Titik 5</strong>: ( (5,6) )</p></li>
+<li><p><strong>Titik 4</strong>: ( (4,5) )</p></li>
+<li><p><strong>Titik 6</strong>: ( (6,7) )</p></li>
+<li><p><strong>Titik 3</strong>: ( (3,4) )</p></li>
+<li><p><strong>Titik 7</strong>: ( (7,8) )</p></li>
+<li><p><strong>Titik 2</strong>: ( (2,3) )</p></li>
+<li><p><strong>Titik 8</strong>: ( (8,9) )</p></li>
+<li><p><strong>Titik 1</strong>: ( (1,2) )</p></li>
+<li><p><strong>Titik 9</strong>: ( (9,10) )</p></li>
+<li><p><strong>Titik 10</strong>: ( (10,11) )</p></li>
 </ul>
-</li>
-<li><p><strong>Tentukan k-Tetangga Terdekat</strong> (k=2):<br />
-Dua tetangga terdekat titik 5 adalah:</p>
+<section id="menghitung-jarak-euclidean-titik-5-ke-titik-lainnya">
+<h4><strong>Menghitung Jarak Euclidean Titik 5 ke Titik Lainnya</strong><a class="headerlink" href="#menghitung-jarak-euclidean-titik-5-ke-titik-lainnya" title="Link to this heading">#</a></h4>
+<ol class="arabic simple">
+<li><p><strong>Titik 5 ke Titik 4</strong>:
+<span class="math notranslate nohighlight">\(
+d = \sqrt{(4-5)^2 + (5-6)^2} = \sqrt{1 + 1} = \sqrt{2} \approx 1.41
+\)</span></p></li>
+<li><p><strong>Titik 5 ke Titik 6</strong>:
+<span class="math notranslate nohighlight">\(
+d = \sqrt{(6-5)^2 + (7-6)^2} = \sqrt{1 + 1} = \sqrt{2} \approx 1.41
+\)</span></p></li>
+<li><p><strong>Titik 5 ke Titik 3</strong>:
+<span class="math notranslate nohighlight">\(
+d = \sqrt{(3-5)^2 + (4-6)^2} = \sqrt{4 + 4} = \sqrt{8} \approx 2.83
+\)</span></p></li>
+<li><p><strong>Titik 5 ke Titik 7</strong>:
+<span class="math notranslate nohighlight">\(
+d = \sqrt{(7-5)^2 + (8-6)^2} = \sqrt{4 + 4} = \sqrt{8} \approx 2.83
+\)</span></p></li>
+<li><p><strong>Titik 5 ke Titik 2</strong>:
+<span class="math notranslate nohighlight">\(
+d = \sqrt{(2-5)^2 + (3-6)^2} = \sqrt{9 + 9} = \sqrt{18} \approx 4.24
+\)</span></p></li>
+<li><p><strong>Titik 5 ke Titik 8</strong>:
+<span class="math notranslate nohighlight">\(
+d = \sqrt{(8-5)^2 + (9-6)^2} = \sqrt{9 + 9} = \sqrt{18} \approx 4.24
+\)</span></p></li>
+<li><p><strong>Titik 5 ke Titik 1</strong>:
+<span class="math notranslate nohighlight">\(
+d = \sqrt{(1-5)^2 + (2-6)^2} = \sqrt{16 + 16} = \sqrt{32} \approx 5.66
+\)</span></p></li>
+<li><p><strong>Titik 5 ke Titik 9</strong>:
+<span class="math notranslate nohighlight">\(
+d = \sqrt{(9-5)^2 + (10-6)^2} = \sqrt{16 + 16} = \sqrt{32} \approx 5.66
+\)</span></p></li>
+<li><p><strong>Titik 5 ke Titik 10</strong>:
+<span class="math notranslate nohighlight">\(
+d = \sqrt{(10-5)^2 + (11-6)^2} = \sqrt{25 + 25} = \sqrt{50} \approx 7.07
+\)</span></p></li>
+</ol>
+</section>
+</section>
+<hr class="docutils" />
+<section id="tentukan-k-tetangga-terdekat-k-2">
+<h3><strong>2. Tentukan ( k )-Tetangga Terdekat (k = 2)</strong><a class="headerlink" href="#tentukan-k-tetangga-terdekat-k-2" title="Link to this heading">#</a></h3>
+<p>Dari hasil perhitungan jarak, dua titik dengan jarak terkecil dari <strong>Titik 5</strong> adalah:</p>
 <ul class="simple">
-<li><p>Titik 4 (4.0, 5.0) → jarak 1.41</p></li>
-<li><p>Titik 6 (6.0, 7.0) → jarak 1.41</p></li>
+<li><p><strong>Titik 4</strong> ((4,5)) dengan <strong>jarak 1.41</strong></p></li>
+<li><p><strong>Titik 6</strong> ((6,7)) dengan <strong>jarak 1.41</strong></p></li>
 </ul>
-</li>
-<li><p><strong>Hitung Reachability Distance</strong>:<br />
-Reachability distance antara titik 3 dan tetangga:</p>
-<ul class="simple">
-<li><p>Titik 5 ke Titik 4: 1.41</p></li>
-<li><p>Titik 5 ke Titik 6: 1.41</p></li>
-</ul>
-</li>
+<p>Sehingga, <strong>dua tetangga terdekat dari Titik 5 adalah Titik 4 dan Titik 6</strong>.</p>
+</section>
+<hr class="docutils" />
+<section id="hitung-reachability-distance">
+<h3><strong>3. Hitung Reachability Distance</strong><a class="headerlink" href="#hitung-reachability-distance" title="Link to this heading">#</a></h3>
+<p><strong>Reachability distance</strong> adalah nilai maksimum dari:</p>
+<ol class="arabic simple">
+<li><p><strong>Core distance</strong>: Jarak ke titik ke-( k ) dalam ( k )-tetangga.</p></li>
+<li><p><strong>Jarak ke titik tujuan</strong>.</p></li>
+</ol>
+<p>Karena kita mencari reachability distance dari <strong>Titik 5</strong> ke <strong>Titik 4</strong> dan <strong>Titik 6</strong>, serta <strong>jarak ke-2 tetangga sama</strong>, maka:</p>
+<p><span class="math notranslate nohighlight">\(
+\text{reachability distance}(T_5, T_4) = \max(d(T_5, T_4), \text{core distance}(T_5))
+\)</span></p>
+<p><span class="math notranslate nohighlight">\(
+= \max(1.41, 1.41) = 1.41
+\)</span></p>
+<p><span class="math notranslate nohighlight">\(
+\text{reachability distance}(T_5, T_6) = \max(d(T_5, T_6), \text{core distance}(T_5))
+\)</span></p>
+<p><span class="math notranslate nohighlight">\(
+= \max(1.41, 1.41) = 1.41
+\)</span></p>
+<p>Sehingga <strong>reachability distance dari Titik 5 ke Titik 4 dan Titik 6 sama dengan 1.41</strong>.</p>
+<ol class="arabic simple" start="5">
 <li><p><strong>Hitung Local Reachability Density (LRD)</strong>:<br />
 <span class="math notranslate nohighlight">\(
 \text{LRD}(5) = \frac{1}{\frac{1}{2} \times (1.41 + 1.41)}
@@ -518,6 +593,7 @@ Reachability distance antara titik 3 dan tetangga:</p>
 Karena LOF = 2 (lebih besar dari 1), titik 5 dianggap outlier.</p></li>
 </ol>
 <p>LOF mengukur seberapa terisolasi titik dibandingkan tetangganya. Titik dengan LOF lebih besar dari 1 dianggap outlier.</p>
+</section>
 </section>
 <section id="implementasi-pakai-sklearn-untuk-data-contoh">
 <h2>Implementasi Pakai Sklearn Untuk Data Contoh<a class="headerlink" href="#implementasi-pakai-sklearn-untuk-data-contoh" title="Link to this heading">#</a></h2>
@@ -669,6 +745,39 @@ Index: []
 <span class="c1"># Ambil data fitur numerik</span>
 <span class="n">feature_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;petal_length&quot;</span><span class="p">,</span> <span class="s2">&quot;petal_width&quot;</span><span class="p">,</span> <span class="s2">&quot;sepal length&quot;</span><span class="p">,</span> <span class="s2">&quot;sepal width&quot;</span><span class="p">]</span>
 <span class="n">data_values</span> <span class="o">=</span> <span class="n">df_merged</span><span class="p">[</span><span class="n">feature_columns</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">OperationalError</span><span class="g g-Whitespace">                          </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">42</span>
+<span class="g g-Whitespace">     </span><span class="mi">39</span>     <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">41</span> <span class="c1"># Ambil data dari kedua database</span>
+<span class="ne">---&gt; </span><span class="mi">42</span> <span class="n">df_postgresql</span> <span class="o">=</span> <span class="n">get_pg_data</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">43</span> <span class="n">df_mysql</span> <span class="o">=</span> <span class="n">get_mysql_data</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">45</span> <span class="c1"># Gabungkan berdasarkan kolom &#39;id&#39; dan &#39;Class&#39;</span>
+
+<span class="nn">Cell In[3], line 10,</span> in <span class="ni">get_pg_data</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="k">def</span> <span class="nf">get_pg_data</span><span class="p">():</span>
+<span class="ne">---&gt; </span><span class="mi">10</span>     <span class="n">conn</span> <span class="o">=</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span>         <span class="n">host</span><span class="o">=</span><span class="s2">&quot;pg-382999bb-posgresqlpendataa.g.aivencloud.com&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span>         <span class="n">user</span><span class="o">=</span><span class="s2">&quot;avnadmin&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span>         <span class="n">password</span><span class="o">=</span><span class="s2">&quot;AVNS_AwzON_kzF3kYXNu_CrZ&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span>         <span class="n">database</span><span class="o">=</span><span class="s2">&quot;defaultdb&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span>         <span class="n">port</span><span class="o">=</span><span class="mi">11188</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span>     <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span>     <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span>     <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM nabila.postgres;&quot;</span><span class="p">)</span>
+
+<span class="nn">File /usr/local/python/3.12.1/lib/python3.12/site-packages/psycopg2/__init__.py:122,</span> in <span class="ni">connect</span><span class="nt">(dsn, connection_factory, cursor_factory, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">119</span>     <span class="n">kwasync</span><span class="p">[</span><span class="s1">&#39;async_&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;async_&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">121</span> <span class="n">dsn</span> <span class="o">=</span> <span class="n">_ext</span><span class="o">.</span><span class="n">make_dsn</span><span class="p">(</span><span class="n">dsn</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">122</span> <span class="n">conn</span> <span class="o">=</span> <span class="n">_connect</span><span class="p">(</span><span class="n">dsn</span><span class="p">,</span> <span class="n">connection_factory</span><span class="o">=</span><span class="n">connection_factory</span><span class="p">,</span> <span class="o">**</span><span class="n">kwasync</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">123</span> <span class="k">if</span> <span class="n">cursor_factory</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">124</span>     <span class="n">conn</span><span class="o">.</span><span class="n">cursor_factory</span> <span class="o">=</span> <span class="n">cursor_factory</span>
+
+<span class="ne">OperationalError</span>: could not translate host name &quot;pg-382999bb-posgresqlpendataa.g.aivencloud.com&quot; to address: Name or service not known
 </pre></div>
 </div>
 </div>
@@ -979,7 +1088,15 @@ Data Outlier:
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apa-itu-lof">Apa Itu LOF</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tahapan-local-outlier-factor-lof">Tahapan Local Outlier Factor (LOF)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contoh-menghitung-manual-lof">CONTOH MENGHITUNG MANUAL LOF</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contoh-menghitung-manual-lof">CONTOH MENGHITUNG MANUAL LOF</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hitung-jarak-euclidean"><strong>1. Hitung Jarak Euclidean</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#menghitung-jarak-euclidean-titik-5-ke-titik-lainnya"><strong>Menghitung Jarak Euclidean Titik 5 ke Titik Lainnya</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tentukan-k-tetangga-terdekat-k-2"><strong>2. Tentukan ( k )-Tetangga Terdekat (k = 2)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hitung-reachability-distance"><strong>3. Hitung Reachability Distance</strong></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-pakai-sklearn-untuk-data-contoh">Implementasi Pakai Sklearn Untuk Data Contoh</a></li>
 </ul>
   </nav></div>
